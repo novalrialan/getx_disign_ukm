@@ -6,44 +6,6 @@ class UKM extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> menuList = [
-      const Category(
-        icon: Icon(
-          Icons.laptop_mac,
-          size: 35,
-          color: Colors.blueAccent,
-        ),
-        caption: "PSG",
-        color: Color(0xFFEEF7FE),
-      ),
-      const Category(
-        icon: Icon(
-          Icons.auto_graph,
-          size: 35,
-          color: Colors.greenAccent,
-        ),
-        caption: "KSPM",
-        color: Color(0xFFD1FCD2),
-      ),
-      const Category(
-        icon: Icon(
-          Icons.sports_gymnastics_rounded,
-          size: 35,
-          color: Colors.redAccent,
-        ),
-        caption: "KRT",
-        color: Color(0xFFF9CFCF),
-      ),
-      const Category(
-        icon: Icon(
-          Icons.sports_basketball,
-          size: 35,
-          color: Colors.grey,
-        ),
-        caption: "BSKT",
-        color: Color(0xFFD5D0D3),
-      ),
-    ];
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -77,29 +39,33 @@ class UKM extends StatelessWidget {
                       right: 50,
                     ),
                     child: Wrap(
-                        alignment: WrapAlignment.spaceBetween,
-                        runSpacing: 20,
-                        spacing: 50,
+                        crossAxisAlignment: WrapCrossAlignment.end,
                         children: [
-                          ...menuList.toList(),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                // MENU LIST
+                                ...menuList.sublist(0, 4),
+                              ]),
+                          // MENU MORE
                           Container(
                             alignment: Alignment.bottomRight,
                             child: Column(
                               children: [
                                 Container(
-                                  padding: const EdgeInsets.all(5),
+                                  padding: const EdgeInsets.all(4),
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12),
+                                    borderRadius: BorderRadius.circular(30),
                                     color: const Color(0xFFAC9CEC)
                                         .withOpacity(0.2),
                                   ),
                                   child: IconButton(
                                     onPressed: () {
-                                      // Get.to(const SlideUpMenu());
                                       showBottomSheet(
                                           context: context,
                                           builder: (context) {
-                                            var widMenu = menuList.toList();
+                                            var topMenu = menuList;
+                                            var resourceMenu = otherMenu;
                                             return Column(
                                               children: [
                                                 const SizedBox(
@@ -109,31 +75,78 @@ class UKM extends StatelessWidget {
                                                   children: [
                                                     Container(
                                                       padding:
-                                                          EdgeInsets.all(20),
-                                                      alignment:
-                                                          Alignment.topLeft,
-                                                      child: const Text(
-                                                        "Top Group",
-                                                        style: TextStyle(
-                                                            fontSize: 20,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      padding: const EdgeInsets
-                                                              .symmetric(
-                                                          horizontal: 18.0),
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
+                                                          const EdgeInsets.all(
+                                                              20),
+                                                      child: Column(
                                                         children: [
-                                                          widMenu[0],
-                                                          widMenu[1],
-                                                          widMenu[2],
-                                                          widMenu[3],
+                                                          Container(
+                                                            alignment: Alignment
+                                                                .topLeft,
+                                                            child: const Text(
+                                                              "Top Group",
+                                                              style: TextStyle(
+                                                                  fontSize: 20,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                            height: 10,
+                                                          ),
+                                                          Container(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .symmetric(
+                                                                    horizontal:
+                                                                        18.0),
+                                                            child: Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                ...topMenu,
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Container(
+                                                            alignment: Alignment
+                                                                .topLeft,
+                                                            child: const Text(
+                                                              "Other Resource",
+                                                              style: TextStyle(
+                                                                  fontSize: 20,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                            height: 10,
+                                                          ),
+                                                          Container(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .symmetric(
+                                                                    horizontal:
+                                                                        18.0),
+                                                            child: Column(
+                                                              children: [
+                                                                Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceAround,
+                                                                  children: [
+                                                                    // MENU OTHER RESOURCE
+                                                                    ...resourceMenu
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
                                                         ],
                                                       ),
                                                     ),
@@ -190,6 +203,113 @@ class UKM extends StatelessWidget {
   }
 }
 
+// WIDGET MENU UTAMA
+final List<Widget> menuList = [
+  const Category(
+    icon: Icon(
+      Icons.laptop_mac,
+      size: 35,
+      color: Color(0xFF264653),
+    ),
+    caption: "PSG",
+    color: Color(0xFF003566),
+  ),
+  const Category(
+    icon: Icon(
+      Icons.queue_music_rounded,
+      size: 35,
+      color: Color(0xFF1e96fc),
+    ),
+    caption: "IMCH",
+    color: Color(0xFF00bbf9),
+  ),
+  const Category(
+    icon: Icon(
+      Icons.connect_without_contact_rounded,
+      size: 35,
+      color: Color(0xFFc81d25),
+    ),
+    caption: "FUEL",
+    color: Color(0xFFFF4D6D),
+  ),
+  const Category(
+    icon: Icon(
+      Icons.sports_basketball,
+      size: 35,
+      color: Color(0xff002855),
+    ),
+    caption: "BSKT",
+    color: Color(0xFFD5D0D3),
+  ),
+  const Category(
+    icon: Icon(
+      Icons.auto_graph,
+      size: 35,
+      color: Color(0xFFffdd00),
+    ),
+    caption: "KSPM",
+    color: Color(0xFF80ffdb),
+  ),
+  const Category(
+    icon: Icon(
+      Icons.video_settings_rounded,
+      size: 35,
+      color: Color(0xFF1D2D44),
+    ),
+    caption: "IMP",
+    color: Color(0xFFaeb8fe),
+  ),
+  const Category(
+    icon: Icon(
+      Icons.sports_gymnastics_rounded,
+      size: 35,
+      color: Colors.redAccent,
+    ),
+    caption: "KRT",
+    color: Color(0xFFF9CFCF),
+  ),
+  const Category(
+    icon: Icon(
+      Icons.landscape_rounded,
+      size: 35,
+      color: Color(0xFF43aa8b),
+    ),
+    caption: "MPA",
+    color: Color(0xFF34a0a4),
+  ),
+];
+
+// WIDGET OTHER MENU
+final List<Widget> otherMenu = [
+  const Category(
+    icon: Icon(
+      Icons.vaccines_sharp,
+      size: 35,
+      color: Color(0xFF80ED99),
+    ),
+    caption: "Vaccine",
+    color: Color(0xFFC7F9CC),
+  ),
+  const Category(
+    icon: Icon(
+      Icons.medical_services_rounded,
+      size: 35,
+      color: Color(0xFFBF0603),
+    ),
+    caption: "Donnor",
+    color: Color(0xFFFF4D6D),
+  ),
+  const Category(
+    icon: Icon(
+      Icons.airport_shuttle_rounded,
+      size: 35,
+      color: Color(0xFFFDD500),
+    ),
+    caption: "Ambulance",
+    color: Color(0xFFFFEA00),
+  ),
+];
+
 class Category extends StatelessWidget {
   final Icon icon;
   final String caption;
@@ -207,22 +327,24 @@ class Category extends StatelessWidget {
       onTap: () {},
       child: Column(
         children: [
-          Container(
-            height: 70,
-            width: 60,
-            padding: const EdgeInsets.only(top: 14),
-            alignment: Alignment.bottomCenter,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: color.withOpacity(0.3),
-            ),
-            child: Column(
-              children: [
-                Center(
-                  child: icon,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(11),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: color.withOpacity(0.3),
                 ),
-              ],
-            ),
+                child: Column(
+                  children: [
+                    Center(
+                      child: icon,
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
           Text(
             caption,
